@@ -5,25 +5,37 @@ import QtQuick.Dialogs 1.2
 
 ApplicationWindow {
     id: mainApplicationWindow
+    objectName: "test"
     title: qsTr("The Sixth Sensor")
     width:  1200
     height: 800
     visible: true
     color: "darkgray"
 
+    signal userLoggedIn(string u)
+
     //Container for the Login Page
     Login {
         id: loginPage
         opacity: 1
         stateStatus: "visible"
-        loginMouseArea {
-            onClicked: {
-                loginPage.stateStatus = "notVisible"
-                imageStackMenuPage.stateStatus = "visible"
-                imageStackMenuPage.z =  0
-                bottomButtonContainer.stateStatus = "visible"
-                usernameTemplate = ""; passwordTemplate = ""
-            }
+        onInputEntered: {
+                if( BI.checkLogin(u, p)){
+                    loginPage.stateStatus = "notVisible"
+                    imageStackMenuPage.stateStatus = "visible"
+                    imageStackMenuPage.z =  0
+                    bottomButtonContainer.stateStatus = "visible"
+                    usernameTemplate = ""; passwordTemplate = ""
+
+                    imageStackMenuPage.menuView.currentIndex = 1;
+                    for(var i = 0; i <= imageStackMenuPage.menuView.count; i++){
+                        imageStackMenuPage.menuModel.remove(i);
+                    }
+                    mainApplicationWindow.userLoggedIn(u)
+                }
+                else{
+                    loginErrorWindow.visible = true;
+                }
         }
     }
     //Container for the Image Stack Menu
@@ -62,6 +74,10 @@ ApplicationWindow {
                     buttonRvis = true
                     imageStackMenuPage.stateStatus = "notVisible"
                     imageReviewPage.stateStatus = "visible"
+                    var name = imageStackMenuPage.menuModel.get(imageStackMenuPage.menuView.currentIndex).stackName
+                    var comments = imageStackMenuPage.menuModel.get(imageStackMenuPage.menuView.currentIndex).stackComments
+                    var date = imageStackMenuPage.menuModel.get(imageStackMenuPage.menuView.currentIndex).uploadDate
+                    //BI.updateImageStack(name, comment, date)
                 }
             }
         }
@@ -97,6 +113,13 @@ ApplicationWindow {
                            {stackName: name, uploadDate: date, stackComments: comments})
             nameTextTemplate = "Image stack name"
             commentsTextTemplate = "Write image stack comments"
+            BI.addImageStack(name, comments, date);
         }
+    }
+    LoginError { id: loginErrorWindow}
+
+    function insertData(n, d, c) {
+        imageStackMenuPage.menuModel.append(
+                    {stackName: n, uploadDate: d, stackComments: c})
     }
 }

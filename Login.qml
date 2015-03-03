@@ -10,10 +10,12 @@ Rectangle {
     opacity: 1
     anchors.horizontalCenter: parent.horizontalCenter
 
+    signal inputEntered(string u, string p)
     property alias stateStatus: loginPageContainer.state
     property alias loginMouseArea: loginButton.buttonMouseArea
     property alias usernameTemplate: usernameInput.text
     property alias passwordTemplate: passwordInput.text
+
 
     //States used for animation to move between GUI pages
     states: [
@@ -100,7 +102,11 @@ Rectangle {
         anchors.topMargin: 25
         anchors.right: inputFields.right
         buttonText: "Login"
-        buttonMouseArea {}
+        buttonMouseArea {
+            onClicked: {
+                inputEntered(usernameInput.text, passwordInput.text);
+            }
+        }
     }
 }
 

@@ -1,5 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>flir.png</file>
+        <file>Ex1.tiff</file>
+        <file>Ex2.tiff</file>
+        <file>Ex3.tiff</file>
+        <file>Ex4.tiff</file>
     </qresource>
 </RCC>

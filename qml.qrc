@@ -8,5 +8,6 @@
         <file>AddWindow.qml</file>
         <file>ImageReviewPage.qml</file>
         <file>Login.qml</file>
+        <file>LoginError.qml</file>
     </qresource>
 </RCC>

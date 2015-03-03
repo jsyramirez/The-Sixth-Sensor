@@ -9,6 +9,7 @@ Rectangle {
     opacity: 0; state: "notVisible"
     anchors.horizontalCenter: parent.horizontalCenter
     property alias menuModel: imageStackModel
+    property alias menuView: imageStackView
     property alias stateStatus: menuPageContainer.state
 
     //States used for animation to move between GUI pages
@@ -67,13 +68,8 @@ Rectangle {
             id: imageStackModel
             ListElement{
                 stackName: "Image Stack 1"
-                uploadDate: "02-07-2015"
-                stackComments: "None."
-            }
-            ListElement{
-                stackName: "Image Stack 2"
-                uploadDate: "02-07-2015"
-                stackComments: "None."
+                uploadDate: ""
+                stackComments: ""
             }
         }
         Component {
