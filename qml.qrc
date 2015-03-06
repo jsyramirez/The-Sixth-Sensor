@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MenuPage.qml</file>
+        <file>BottomContainer.qml</file>
+        <file>ButtonGeneral.qml</file>
+        <file>LogoutPopUp.qml</file>
+        <file>AddWindow.qml</file>
+        <file>ImageReviewPage.qml</file>
+        <file>Login.qml</file>
+        <file>LoginError.qml</file>
+    </qresource>
+</RCC>
